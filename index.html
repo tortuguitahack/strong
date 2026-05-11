@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIHACKTOR Ω — SOVEREIGN DASHBOARD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.6); }
+        }
+        .capa-7 { animation: pulse-glow 2s ease-in-out infinite; border: 2px solid #ef4444; }
+        .antigravity { border: 2px solid #22d3ee; box-shadow: 0 0 40px rgba(34, 211, 238, 0.3); }
+        .terminal { background: #0a0a0f; font-family: 'Courier New', Courier, monospace; color: #0f0; }
+    </style>
+</head>
+<body class="bg-[#050508] text-white min-h-screen">
+    <div id="root">
+        <!-- Header -->
+        <header class="border-b border-red-500/30 bg-[#0a0a0f]/90 p-4 sticky top-0 z-50 backdrop-blur-md">
+            <div class="flex justify-between items-center max-w-7xl mx-auto">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                        <i data-lucide="zap" class="text-white"></i>
+                    </div>
+                    <h1 class="text-xl font-bold tracking-widest text-red-500">DIHACKTOR Ω — CAPA 7</h1>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="text-right">
+                        <div class="text-xs text-gray-400">UPTIME GLOBAL</div>
+                        <div id="uptime" class="font-mono text-lg text-red-400">--:--:--</div>
+                    </div>
+                    <button id="toggleMode" class="px-6 py-2 bg-red-500/20 border border-red-500 rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all">
+                        MODO ANTIGRAVITY
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Stats -->
+        <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-[#0a0a0f] p-6 rounded-xl border border-gray-800 hover:border-red-500/50 transition-all">
+                <div class="text-gray-400 text-sm mb-1">CAPITAL TOTAL</div>
+                <div id="capital" class="text-3xl font-black text-white">$ 0.00</div>
+                <div class="text-green-500 text-xs mt-2">↑ 20,000 Transacciones/Día Objetivo</div>
+            </div>
+            <div class="bg-[#0a0a0f] p-6 rounded-xl border border-gray-800 hover:border-red-500/50 transition-all">
+                <div class="text-gray-400 text-sm mb-1">NODOS ACTIVOS</div>
+                <div class="flex gap-2 mt-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                </div>
+                <div class="text-xs text-gray-500 mt-2">ASUS | DELL | HP</div>
+            </div>
+            <div class="bg-[#0a0a0f] p-6 rounded-xl border border-gray-800 hover:border-red-500/50 transition-all">
+                <div class="text-gray-400 text-sm mb-1">LATENCIA DE RED</div>
+                <div id="latency" class="text-3xl font-black text-cyan-400">12ms</div>
+                <div class="text-xs text-gray-500 mt-2">Protocolo Antigravity Activo</div>
+            </div>
+            <div class="bg-[#0a0a0f] p-6 rounded-xl border border-gray-800 hover:border-red-500/50 transition-all">
+                <div class="text-gray-400 text-sm mb-1">ESTADO AML</div>
+                <div class="text-xl font-bold text-green-500">LIMPIO</div>
+                <div class="text-xs text-gray-500 mt-2">Prueba de Origen Verificada</div>
+            </div>
+        </main>
+
+        <!-- Matrix Control -->
+        <section class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Payout Terminal -->
+            <div class="bg-[#0a0a0f] rounded-xl border border-gray-800 overflow-hidden">
+                <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-[#11111a]">
+                    <span class="font-bold">TERMINAL DE BARRIDO (LEVIATHAN)</span>
+                    <span class="text-xs text-red-500 font-mono">DAEMON: 120s</span>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex justify-between p-3 bg-white/5 rounded border border-white/10">
+                            <span>MERCANTIL BOL</span>
+                            <span class="text-green-400 font-mono">REF-4069474188</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-white/5 rounded border border-white/10">
+                            <span>USDT (BEP20)</span>
+                            <span class="text-cyan-400 font-mono">0xeBe...C053</span>
+                        </div>
+                        <button id="executeSweep" class="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-black rounded-lg transition-all">
+                            EJECUTAR BARRIDO MASIVO
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Logs -->
+            <div class="bg-[#0a0a0f] rounded-xl border border-gray-800 overflow-hidden flex flex-col">
+                <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-[#11111a]">
+                    <span class="font-bold text-cyan-400">LOGS DE SISTEMA (BRAIN & UPLOADER)</span>
+                </div>
+                <div id="logs" class="p-4 flex-1 terminal overflow-y-auto h-64 text-xs font-mono">
+                    <div>[21:00:12] BRAIN: Cerebro de Sincronización Activado.</div>
+                    <div>[21:00:15] UPLOADER: Resolviendo IPs (Dual-Stack)...</div>
+                    <div>[21:00:20] ANALYTICS: Monitoreando ventas en tiempo real...</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        const logsContainer = document.getElementById('logs');
+        const addLog = (msg, color = '#0f0') => {
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            logsContainer.appendChild(div);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        };
+
+        let mode = 'CAPA7';
+        document.getElementById('toggleMode').onclick = (e) => {
+            mode = mode === 'CAPA7' ? 'ANTIGRAVITY' : 'CAPA7';
+            e.target.textContent = `MODO ${mode}`;
+            document.body.classList.toggle('antigravity');
+            addLog(`SISTEMA: Cambiando a ${mode}...`, mode === 'ANTIGRAVITY' ? '#22d3ee' : '#ef4444');
+        };
+
+        document.getElementById('executeSweep').onclick = async () => {
+            addLog('⚠️ INICIANDO BARRIDO MASIVO DE CAPITAL...', '#f59e0b');
+            const res = await fetch('http://localhost:3333/api/sovereign/payout', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({amount: 1000, gateway: 'GLOBAL_ROUTING'})
+            });
+            const data = await res.json();
+            addLog(`✅ BARRIDO COMPLETADO. TXID: ${data.tx_id}`, '#10b981');
+        };
+
+        // Real-time status polling
+        setInterval(async () => {
+            try {
+                const res = await fetch('http://localhost:3333/api/sovereign/status');
+                const data = await res.json();
+                document.getElementById('uptime').textContent = new Date(data.uptime * 1000).toISOString().substr(11, 8);
+                document.getElementById('capital').textContent = `$ ${(data.total_sales * 6.99).toFixed(2)}`;
+            } catch(e) {}
+        }, 5000);
+    </script>
+</body>
+</html>
